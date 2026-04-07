@@ -15,8 +15,9 @@
             @endif
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                {{-- Form Tambah Pengeluaran --}}
+                {{-- Form Tambah Pengeluaran - Hanya Admin --}}
                 <div class="md:col-span-1">
+                    @role('admin')
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6">
                             <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100 border-b pb-2">Catat Pengeluaran Baru</h3>
@@ -40,6 +41,7 @@
                             </form>
                         </div>
                     </div>
+                    @endrole
                 </div>
 
                 {{-- Tabel Riwayat --}}
@@ -67,11 +69,15 @@
                                             <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-100 font-medium">{{ $expense->description }}</td>
                                             <td class="px-4 py-3 whitespace-nowrap text-sm text-red-500 font-bold">Rp {{ number_format($expense->amount, 0, ',', '.') }}</td>
                                             <td class="px-4 py-3 whitespace-nowrap text-right text-sm">
+                                                @role('admin')
                                                 <form action="{{ route('expenses.destroy', $expense->id) }}" method="POST" class="inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('Yakin hapus pengeluaran ini?')">Hapus</button>
                                                 </form>
+                                                @else
+                                                <span class="text-gray-400 text-xs italic">-</span>
+                                                @endrole
                                             </td>
                                         </tr>
                                         @empty

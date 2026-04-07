@@ -18,12 +18,14 @@
 
                     <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
                         <h3 class="text-lg font-bold mb-4 sm:mb-0 text-gray-800 dark:text-gray-200">Semua Tagihan</h3>
+                        @role('admin')
                         <form action="{{ route('billings.generate') }}" method="POST">
                             @csrf
                             <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded shadow transition text-sm">
                                 Generate Tagihan Bulan Ini
                             </button>
                         </form>
+                        @endrole
                     </div>
 
                     <div class="overflow-x-auto shadow-sm ring-1 ring-black ring-opacity-5 rounded-lg">
@@ -66,6 +68,7 @@
                                             @endphp
                                             <a href="https://wa.me/{{ $waPhone }}?text={{ $waText }}" target="_blank" class="text-emerald-600 hover:text-emerald-900 mr-4 font-bold">WA</a>
                                             
+                                            @role('admin')
                                             <div class="flex flex-col items-end gap-2 mt-2">
                                                 <form action="{{ route('billings.pay', $bill->id) }}" method="POST" enctype="multipart/form-data" class="flex flex-col items-end gap-1">
                                                     @csrf
@@ -73,6 +76,7 @@
                                                     <button type="submit" class="text-blue-600 hover:text-blue-900 font-bold text-xs bg-blue-50 px-3 py-1 border border-blue-200 rounded" onclick="return confirm('Tandai lunas?')">Lunas</button>
                                                 </form>
                                             </div>
+                                            @endrole
                                         @else
                                             <div class="flex flex-col items-end gap-1">
                                                 <a href="{{ route('billings.invoice', $bill->id) }}" target="_blank" class="text-blue-600 hover:text-blue-900 font-bold text-[10px] uppercase bg-blue-50 px-2 py-1 rounded border border-blue-200">Struk</a>

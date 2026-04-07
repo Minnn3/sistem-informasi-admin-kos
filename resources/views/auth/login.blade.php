@@ -49,4 +49,12 @@
             </x-primary-button>
         </div>
     </form>
+
+    <!-- Link Daftar Akun Karyawan -->
+    <div class="mt-6 text-center border-t border-gray-700 pt-5">
+        <p class="text-gray-400 text-sm mb-2">Belum punya akun karyawan?</p>
+        <a href="{{ route('register') }}" class="inline-block w-full text-center bg-transparent border border-indigo-500 text-indigo-400 hover:bg-indigo-600 hover:text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200">
+            + Daftar Akun Karyawan
+        </a>
+    </div>
 </x-guest-layout>

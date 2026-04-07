@@ -21,9 +21,11 @@
                         <a href="{{ route('rooms.index') }}" class="ml-3 text-sm text-red-500 hover:text-red-700 self-center font-semibold">Reset</a>
                     @endif
                 </form>
+                @role('admin')
                 <a href="{{ route('rooms.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded whitespace-nowrap ml-4">
                     + Tambah Kamar
                 </a>
+                @endrole
             </div>
 
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -52,12 +54,16 @@
                                         </span>
                                     </td>
                                     <td class="py-4 px-6 border-b border-gray-200 dark:border-gray-600 flex gap-2">
+                                        @role('admin')
                                         <a href="{{ route('rooms.edit', $room) }}" class="text-blue-600 hover:text-blue-900 dark:text-blue-400">Edit</a>
                                         <form action="{{ route('rooms.destroy', $room) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kamar ini?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-600 hover:text-red-900 dark:text-red-400">Hapus</button>
                                         </form>
+                                        @else
+                                        <span class="text-gray-400 text-xs italic">Hanya lihat</span>
+                                        @endrole
                                     </td>
                                 </tr>
                                 @empty
